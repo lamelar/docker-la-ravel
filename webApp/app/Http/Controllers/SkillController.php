@@ -15,20 +15,24 @@ class SkillController extends Controller
         $this->skill = new SKill();
     }
 
+    //一覧表示
     function show(Request $request, Response $response){
         $items = DB::table('skill')->paginate(10);
-        return view('skill.index',['items' => $items]);
+        return view('skill.index',compact('items'));
     }
 
+    //ソート
     function sort($key){
         $items = DB::table('skill')->orderBy($key)->paginate(10);
-        return view('skill.index',['items' => $items]);
+        return view('skill.index',compact('items'));
     }
 
+    //登録画面
     function show_detail(){
         return view('skill.detail');
     }
 
+    //登録処理
     function post(SkillRequest $request, Response $response){
     
         $request->category_code;
@@ -37,15 +41,16 @@ class SkillController extends Controller
         $this->skill->InsertSkill($request);
 
         $items = DB::table('skill')->paginate(10);
-        return view('skill.index',['items' => $items]);
+        return view('skill.index',compact('items'));
     }
 
+    //詳細表示
     function edit($id){
         $item = Skill::find((int)$id);
-        return view('skill.edit',['item' => $item]);
-
+        return view('skill.edit',compact('item'));
     }
 
+    //更新処理
     public function update(SkillRequest $request, Response $response)
     {
         $skill = Skill::find($request->id);
@@ -56,9 +61,10 @@ class SkillController extends Controller
         $skill->save();
 
         $items = DB::table('skill')->paginate(10);
-        return view('skill.index',['items' => $items]);
+        return view('skill.index',compact('items'));
     }
 
+    //削除処理
     public function delete(Request $request, Response $response)
     {
         $skill = Skill::find($request->id);
@@ -66,13 +72,14 @@ class SkillController extends Controller
         $skill->delete();
 
         $items = DB::table('skill')->paginate(10);
-        return view('skill.index',['items' => $items]);
+        return view('skill.index',compact('items'));
     }
 
+    //検索処理
     function index(Request $request, Response $response){
 
         $items = Skill::where('category_code', '=', $request->category_code)->paginate(10);
 
-        return view('skill.index',['items' => $items]);
+        return view('skill.index',compact('items'));
     }
 }

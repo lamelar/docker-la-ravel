@@ -12,7 +12,9 @@
     </div>
     @if ($errors->has('category_code'))
     <div>
-        {{$errors->first('category_code')}}
+    @foreach ($errors->get('category_code') as $error)
+        <li>{{ $error }}</li>
+    @endforeach
     </div>
     @endif
     <div>
@@ -21,7 +23,9 @@
     </div>
     @if ($errors->has('content'))
     <div>
-        {{$errors->first('content')}}
+    @foreach ($errors->get('content') as $error)
+        <li>{{ $error }}</li>
+    @endforeach
     </div>
     @endif
     <button type="submit">登録</button>
