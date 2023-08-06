@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\Skill;
 use App\Http\Requests\SkillRequest;
 
@@ -17,7 +18,9 @@ class SkillController extends Controller
 
     //一覧表示
     function show(Request $request, Response $response){
-        $items = DB::table('skill')->paginate(10);
+        \DB::enableQueryLog();
+        $items = DB::table('skill')->paginate(10);    
+        Log::info(DB::getQueryLog());
         return view('skill.index',compact('items'));
     }
 
@@ -76,6 +79,7 @@ class SkillController extends Controller
     }
 
     //検索処理
+    
     function index(Request $request, Response $response){
 
         $items = Skill::where('category_code', '=', $request->category_code)->paginate(10);
