@@ -24,6 +24,11 @@ class SkillController extends Controller
     }
 
     function post(Request $request, Response $response){
+        $validated = $request->validate([
+            'category_code' => 'required',
+            'content' => 'required',
+        ]);
+    
         $request->category_code;
         $request->content;
         

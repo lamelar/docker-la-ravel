@@ -42,3 +42,9 @@ Route::post('/update', 'App\Http\Controllers\SkillController@update');
 Route::post('/delete', 'App\Http\Controllers\SkillController@delete');
 
 Route::post('/index', 'App\Http\Controllers\SkillController@index');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
