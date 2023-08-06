@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Skill;
+use App\Rules\UpperAlpha;
 
 class SkillController extends Controller
 {
@@ -24,9 +25,9 @@ class SkillController extends Controller
     }
 
     function post(Request $request, Response $response){
-        $validated = $request->validate([
-            'category_code' => 'required',
-            'content' => 'required',
+        $request->validate([
+            'category_code' => ['required', 'max:3', new UpperAlpha],
+            'content' => ['required', ] ,
         ]);
     
         $request->category_code;
