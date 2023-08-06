@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Skill;
-use App\Rules\UpperAlpha;
+use App\Http\Requests\SkillRequest;
 
 class SkillController extends Controller
 {
@@ -20,15 +20,16 @@ class SkillController extends Controller
         return view('skill.index',['items' => $items]);
     }
 
+    function sort($key){
+        $items = DB::table('skill')->orderBy($key)->paginate(10);
+        return view('skill.index',['items' => $items]);
+    }
+
     function show_detail(){
         return view('skill.detail');
     }
 
-    function post(Request $request, Response $response){
-        $request->validate([
-            'category_code' => ['required', 'max:3', new UpperAlpha],
-            'content' => ['required', ] ,
-        ]);
+    function post(SkillRequest $request, Response $response){
     
         $request->category_code;
         $request->content;
@@ -45,7 +46,7 @@ class SkillController extends Controller
 
     }
 
-    public function update(Request $request, Response $response)
+    public function update(SkillRequest $request, Response $response)
     {
         $skill = Skill::find($request->id);
 

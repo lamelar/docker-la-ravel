@@ -43,6 +43,8 @@ Route::post('/delete', 'App\Http\Controllers\SkillController@delete');
 
 Route::post('/index', 'App\Http\Controllers\SkillController@index');
 
+Route::get('/sort/{key}', 'App\Http\Controllers\SkillController@sort');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

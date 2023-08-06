@@ -13,8 +13,12 @@
     <a href="{{ url('/detail') }}"> 登録 </a>
 
     <table>
-    <tr><th>ID</th><th>カテゴリーコード</th><th>内容</th>
-    <th></th></tr>
+    <tr>
+        <th><a href="{{ url('/sort/id') }}">ID</a></th>
+        <th><a href="{{ url('/sort/category_code') }}">カテゴリーコード</a></th>    
+        <th>内容</th>
+        <th></th>
+    </tr>
     @foreach($items as $item)
         <tr>
             <td>{{$item->id}}</td>

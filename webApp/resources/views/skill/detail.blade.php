@@ -24,9 +24,10 @@
         {{$errors->first('content')}}
     </div>
     @endif
-
-
     <button type="submit">登録</button>
+
+
+    <a href="{{ url('/skill') }}"> 戻る </a>
 </form>
 </body>
 </html>
