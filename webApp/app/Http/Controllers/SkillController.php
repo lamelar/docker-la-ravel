@@ -18,9 +18,7 @@ class SkillController extends Controller
 
     //一覧表示
     function show(Request $request, Response $response){
-        \DB::enableQueryLog();
         $items = DB::table('skill')->paginate(10);    
-        Log::info(DB::getQueryLog());
         return view('skill.index',compact('items'));
     }
 
@@ -42,6 +40,8 @@ class SkillController extends Controller
         $request->content;
         
         $this->skill->InsertSkill($request);
+
+        DB::insert("insert into test values(''aa'');");
 
         $items = DB::table('skill')->paginate(10);
         return view('skill.index',compact('items'));
